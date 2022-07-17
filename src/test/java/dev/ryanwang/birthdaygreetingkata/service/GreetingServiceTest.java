@@ -43,7 +43,7 @@ class GreetingServiceTest {
 
         List<GreetingDTO> greetingDTOList = greetingService.findGreetingList();
         assertEquals(1, greetingDTOList.size());
-        assertEquals("Happy birthday, dear Robert!", greetingDTOList.get(0).getContent());
+        assertEquals("Happy birthday, dear Yen, Robert!", greetingDTOList.get(0).getContent());
     }
 
     @Test
