@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.YEARS;
+
 @Service
 public class GreetingService {
 
@@ -33,6 +35,10 @@ public class GreetingService {
         for (UserPO user : userList) {
             String title = "Subject: Happy birthday!";
             String content = "Happy birthday, dear " + user.getFirstName() + "!";
+            long age = YEARS.between(user.getBirth(), localDate);
+            if(age>49){
+                content = "Happy birthday, dear " + user.getFirstName() + "! \n (A greeting picture here)";
+            }
             GreetingDTO greeting = new GreetingDTO(title, content);
             greetingDTOList.add(greeting);
         }
