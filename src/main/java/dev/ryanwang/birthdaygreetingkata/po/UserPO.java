@@ -34,6 +34,15 @@ public class UserPO {
     @Column(name = "email")
     private String email;
 
+    public UserPO(String uuid, String firstName, String lastName, String gender, LocalDate birth, String email) {
+        this.uuid = uuid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birth = birth;
+        this.email = email;
+    }
+
     public String getUuid() {
         return uuid;
     }
