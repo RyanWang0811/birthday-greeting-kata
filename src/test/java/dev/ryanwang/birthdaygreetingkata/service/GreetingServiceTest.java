@@ -40,4 +40,19 @@ class GreetingServiceTest {
         assertEquals(1, greetingDTOList.size());
         assertEquals("Happy birthday, dear Robert!", greetingDTOList.get(0).getContent());
     }
+
+    @Test
+    void findGreetingListNoResult() {
+        // mock today
+        LocalDate today = LocalDate.of(2022, 7, 8);
+        Mockito.mockStatic(LocalDate.class).when(LocalDate::now).thenReturn(today);
+
+        // mock userRepository
+        final List<UserPO> userPOList = new ArrayList<>();
+        userPOList.add(new UserPO("uuid-1", "Robert", "Yen", "Male", LocalDate.parse("1985-08-08"), "robert.yen@linecorp.com"));
+        Mockito.when(userRepository.findByBirthSpecific(8, 8)).thenReturn(userPOList);
+
+        List<GreetingDTO> greetingDTOList = greetingService.findGreetingList();
+        assertEquals(0, greetingDTOList.size());
+    }
 }
