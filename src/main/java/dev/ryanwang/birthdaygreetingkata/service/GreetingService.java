@@ -32,7 +32,7 @@ public class GreetingService {
         List<UserPO> userList = userRepository.findByBirthSpecific(day, month);
         for (UserPO user : userList) {
             String title = "Subject: Happy birthday!";
-            String content = "Happy birthday, dear " + user.getFirstName() + "!";
+            String content = "Happy birthday, dear "+user.getLastName()+", " + user.getFirstName() + "!";
             GreetingDTO greeting = new GreetingDTO(title, content);
             greetingDTOList.add(greeting);
         }
