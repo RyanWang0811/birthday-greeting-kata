@@ -1,4 +1,10 @@
 # Birthday Greeting Kata
+- [Birthday Greeting Kata](#birthday-greeting-kata)
+  - [Environment](#environment)
+  - [Preparing PostgreSQL via Docker (Optional)](#preparing-postgresql-via-docker-optional)
+  - [Running the Application](#running-the-application)
+  - [Building the Application](#building-the-application)
+  - [Invoke the Greeting API](#invoke-the-greeting-api)
 
 ## Environment
 - JDK 11
@@ -24,5 +30,10 @@ mvn spring-boot:run
 ## Building the Application
 ```
 mvn clean package
+```
+
+## Invoke the Greeting API
+```
+curl 'localhost:8080/greeting'
 ```
 
