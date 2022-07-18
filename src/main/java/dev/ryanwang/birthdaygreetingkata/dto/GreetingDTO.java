@@ -1,5 +1,8 @@
 package dev.ryanwang.birthdaygreetingkata.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class GreetingDTO {
 
     private String title;
