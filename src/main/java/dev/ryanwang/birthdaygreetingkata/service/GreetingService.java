@@ -16,7 +16,13 @@ import java.util.List;
 @Service
 public class GreetingService {
 
-    private Logger logger = LoggerFactory.getLogger(GreetingService.class);
+    private final Logger logger = LoggerFactory.getLogger(GreetingService.class);
+
+    private static final String MANCONTENT = "Happy birthday, dear %s! \n" +
+            "We offer special discount 20%% off for the following items: White Wine, iPhone X";
+
+    private static final String FEMALECONTENT = "Happy birthday, dear %s! \n" +
+            "We offer special discount 50%% off for the following items: Cosmetic, LV Handbags";
 
     @Autowired
     private UserRepository userRepository;
@@ -29,10 +35,17 @@ public class GreetingService {
         int day = localDate.getDayOfMonth();
         int month = localDate.getMonthValue();
 
-        List<UserPO> userList = userRepository.findByBirthSpecific(day, month);
+        List<UserPO> userList = userRepository.findByBirthSpecific(8, 8);
         for (UserPO user : userList) {
+            String content = "";
+
+            if(user.getGender().equals("Male")){
+                content = String.format(MANCONTENT,user.getFirstName());
+            }else if (user.getGender().equals("Female")){
+                content = String.format(FEMALECONTENT,user.getFirstName());
+            }
+
             String title = "Subject: Happy birthday!";
-            String content = "Happy birthday, dear " + user.getFirstName() + "!";
             GreetingDTO greeting = new GreetingDTO(title, content);
             greetingDTOList.add(greeting);
         }
