@@ -1,13 +1,13 @@
 package dev.ryanwang.birthdaygreetingkata.repository;
 
 import dev.ryanwang.birthdaygreetingkata.po.UserPO;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.Aggregation;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<UserPO, String> {
+public interface UserRepository extends MongoRepository<UserPO, String> {
 
-    @Query(value = "select u from UserPO u where DATE_PART('day', birth) = :day and DATE_PART('month', birth) = :month")
+    @Aggregation(value = "{$match: {$expr:{$and:[{$eq:[{$dayOfMonth:'$birth'},?0]},{$eq:[{$month:'$birth'},?1]},],}}}")
     List<UserPO> findByBirthSpecific(int day,int month);
 }

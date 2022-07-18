@@ -2,36 +2,24 @@ package dev.ryanwang.birthdaygreetingkata.po;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-@Table(name = "user_info")
+@Document("UserInfo")
 public class UserPO {
 
     @Id
-    @GenericGenerator(name = "generator", strategy = "uuid2")
-    @GeneratedValue(generator = "generator")
-    @Column(name = "uuid")
     private String uuid;
 
-    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
     private String lastName;
-    @Column(name = "gender")
+
     private String gender;
 
-    @Column(name = "birth")
     private LocalDate birth;
 
-    @Column(name = "email")
     private String email;
 
     public UserPO() {
