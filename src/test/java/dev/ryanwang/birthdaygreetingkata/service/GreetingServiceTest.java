@@ -35,7 +35,7 @@ class GreetingServiceTest {
 
 
     @Test
-    void findGreetingList() {
+    void findGreetingMessageForMale() {
         // mock userRepository
         final List<UserPO> userPOList = new ArrayList<>();
         userPOList.add(new UserPO("uuid-1", "Robert", "Yen", "Male", LocalDate.parse("1985-08-08"), "robert.yen@linecorp.com"));
@@ -43,7 +43,19 @@ class GreetingServiceTest {
 
         List<GreetingDTO> greetingDTOList = greetingService.findGreetingList();
         assertEquals(1, greetingDTOList.size());
-        assertEquals("Happy birthday, dear Robert!", greetingDTOList.get(0).getContent());
+        assertEquals("Happy birthday, dear Robert! \nWe offer special discount 20% off for the following items: White Wine, iPhone X", greetingDTOList.get(0).getContent());
+    }
+
+    @Test
+    void findGreetingMessageForFemale() {
+        // mock userRepository
+        final List<UserPO> userPOList = new ArrayList<>();
+        userPOList.add(new UserPO("uuid-1", "Sherry", "Chen", "Female", LocalDate.parse("1993-08-08"), "sherry.lai@linecorp.com"));
+        Mockito.when(userRepository.findByBirthSpecific(8, 8)).thenReturn(userPOList);
+
+        List<GreetingDTO> greetingDTOList = greetingService.findGreetingList();
+        assertEquals(1, greetingDTOList.size());
+        assertEquals("Happy birthday, dear Sherry! \nWe offer special discount 50% off for the following items: Cosmetic, LV Handbags", greetingDTOList.get(0).getContent());
     }
 
     @Test
