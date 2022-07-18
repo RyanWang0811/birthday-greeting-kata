@@ -35,7 +35,7 @@ public class GreetingService {
         int day = localDate.getDayOfMonth();
         int month = localDate.getMonthValue();
 
-        List<UserPO> userList = userRepository.findByBirthSpecific(8, 8);
+        List<UserPO> userList = userRepository.findByBirthSpecific(day, month);
         for (UserPO user : userList) {
             String content = "";
 
